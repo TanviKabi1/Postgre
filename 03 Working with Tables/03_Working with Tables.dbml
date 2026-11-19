@@ -1,0 +1,20 @@
+// DBML: 03_Working with Tables.dbml
+// Database: relationships
+
+Table users {
+  id       serial [pk, increment]
+  username varchar(50) [not null]
+}
+
+Table photos {
+  id      serial [pk, increment]
+  url     varchar(200)
+  user_id integer [ref: > users.id]
+}
+
+Table comments {
+  id       serial [pk, increment]
+  contents varchar(240)
+  user_id  integer [ref: > users.id]
+  photo_id integer [ref: > photos.id]
+}
