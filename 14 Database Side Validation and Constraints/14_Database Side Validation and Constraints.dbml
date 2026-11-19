@@ -1,0 +1,17 @@
+// DBML: 14_Database Side Validation and Constraints.dbml
+// Database: validation_demo
+
+Table products {
+  id         serial [pk, increment]
+  name       varchar(50) [unique]
+  department varchar(50)
+  price      integer [not null, default: 999, note: 'CHECK (price > 0)']
+  weight     integer
+}
+
+Table orders {
+  id           serial [pk, increment]
+  name         varchar(50) [not null]
+  created_at   timestamp [not null]
+  est_delivery timestamp [not null, note: 'CHECK (created_at < est_delivery)']
+}
