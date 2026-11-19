@@ -1,0 +1,18 @@
+// DBML: 22_Understanding the Internals of PostgreSQL.dbml
+// Database: instagram (queries PostgreSQL system catalogs)
+
+// System catalog: list of all database objects
+Table pg_class [note: 'PostgreSQL system catalog - not user-defined'] {
+  relname     name [note: 'Table or index name']
+  relfilenode oid  [note: 'File node OID for disk storage']
+  relpages    integer [note: 'Number of disk pages']
+  reltuples   real [note: 'Estimated row count']
+  relkind     char [note: 'r=table, i=index, v=view, etc.']
+  relnamespace oid [note: 'OID of the containing schema']
+}
+
+// System catalog: list of all databases in the cluster
+Table pg_database [note: 'PostgreSQL system catalog - not user-defined'] {
+  oid     oid  [pk, note: 'Object identifier']
+  datname name [note: 'Database name']
+}
