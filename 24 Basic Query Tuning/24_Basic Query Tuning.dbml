@@ -1,0 +1,19 @@
+// DBML: 24_Basic Query Tuning.dbml
+// Database: instagram
+
+Table users {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  updated_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  username   varchar(30) [not null]
+  bio        varchar(400)
+  avatar     varchar(200)
+  phone      varchar(25)
+  email      varchar(40)
+  password   varchar(50)
+  status     varchar(15)
+
+  indexes {
+    username [name: 'users_username_idx', note: 'Created to compare EXPLAIN plan with and without index']
+  }
+}
