@@ -1,0 +1,10 @@
+// DBML: 11_Utility Operators Keywords and Functions.dbml
+// Database: ecommerce
+
+Table products {
+  id         serial [pk, increment]
+  name       varchar(100)
+  department varchar(50)
+  price      integer
+  weight     integer
+}
