@@ -1,0 +1,15 @@
+// DBML: 06_Working with Large Datasets.dbml
+// Database: ecommerce
+
+Table users {
+  id         serial [pk, increment]
+  first_name varchar(50)
+  last_name  varchar(50)
+}
+
+Table orders {
+  id         serial [pk, increment]
+  user_id    integer [ref: > users.id]
+  product_id integer
+  paid       boolean
+}
