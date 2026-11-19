@@ -1,0 +1,30 @@
+// DBML: 13_PostgreSQL Complex Datatypes.dbml
+// Database: types_demo
+
+Table items {
+  id         serial [pk, increment]
+  small_num  smallint
+  normal_num integer
+  big_num    bigint
+  exact_num  "numeric(10,2)"
+  approx_num real
+  double_num double_precision
+}
+
+Table characters_demo {
+  fixed_char varchar(10)
+  code_char  char(5)
+  unlimited  text
+}
+
+Table booleans_demo {
+  is_active boolean
+}
+
+Table dates_demo {
+  entry_date date
+  entry_time time
+  time_tz    "time with time zone"
+  stamp      timestamp
+  stamp_tz   "timestamp with time zone"
+}
