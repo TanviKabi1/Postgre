@@ -1,0 +1,16 @@
+// DBML: 01_Simple SQL Statements.dbml
+// Database: fundamentals
+
+Table cities {
+  name       varchar(50)
+  country    varchar(50)
+  population integer
+  area       integer
+}
+
+Table phones {
+  name         varchar(100)
+  manufacturer varchar(100)
+  price        integer
+  units_sold   integer
+}
