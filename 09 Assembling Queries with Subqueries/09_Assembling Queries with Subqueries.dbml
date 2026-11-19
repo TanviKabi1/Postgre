@@ -1,0 +1,30 @@
+// DBML: 09_Assembling Queries with Subqueries.dbml
+// Database: ecommerce
+
+Table users {
+  id         serial [pk, increment]
+  first_name varchar(50)
+  last_name  varchar(50)
+}
+
+Table products {
+  id         serial [pk, increment]
+  name       varchar(100)
+  department varchar(50)
+  price      integer
+  weight     integer
+}
+
+Table orders {
+  id         serial [pk, increment]
+  user_id    integer [ref: > users.id]
+  product_id integer [ref: > products.id]
+  paid       boolean
+}
+
+Table phones {
+  name         varchar(100)
+  manufacturer varchar(100)
+  price        integer
+  units_sold   integer
+}
