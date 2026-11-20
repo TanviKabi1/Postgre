@@ -1,0 +1,16 @@
+// DBML: 35_Security Around PostgreSQL.dbml
+// Database: social_network
+
+Table users {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  updated_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  bio        varchar(400)
+  username   varchar(30) [not null]
+}
+
+// Prepared statements used to prevent SQL injection:
+// PREPARE find_user_by_id (INTEGER) AS SELECT ... FROM users WHERE id = $1
+// PREPARE insert_user (VARCHAR, VARCHAR) AS INSERT INTO users (username, bio) VALUES ($1, $2) RETURNING *
+// PREPARE update_user_bio (INTEGER, VARCHAR) AS UPDATE users SET bio = $2 WHERE id = $1 RETURNING *
+// PREPARE delete_user (INTEGER) AS DELETE FROM users WHERE id = $1 RETURNING *
