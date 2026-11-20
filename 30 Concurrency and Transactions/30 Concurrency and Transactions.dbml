@@ -1,0 +1,8 @@
+// DBML: 30_Handling Concurrency and Transactions.dbml
+// Database: bank_demo
+
+Table accounts {
+  id      serial [pk, increment]
+  name    varchar(20) [not null]
+  balance integer [not null]
+}
