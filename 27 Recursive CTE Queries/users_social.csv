@@ -1,0 +1,5 @@
+id,created_at,updated_at,username,bio,avatar,phone,email,password,status
+1,2026-01-01 10:00:00+00,2026-01-01 10:00:00+00,kayla_b,Photographer & traveler,https://avatar.cc/1,555-1234,kayla@example.com,secret123,online
+2,2026-01-02 11:00:00+00,2026-01-02 11:00:00+00,alex_99,Foodie in NYC,https://avatar.cc/2,555-5678,alex@example.com,secret456,offline
+3,2026-01-03 12:00:00+00,2026-01-03 12:00:00+00,sam_dev,Coder and coffee lover,https://avatar.cc/3,555-9012,sam@example.com,secret789,away
+200,2026-01-04 13:00:00+00,2026-01-04 13:00:00+00,james_80,Landscape enthusiast,https://avatar.cc/200,555-4321,james@example.com,secret000,online
