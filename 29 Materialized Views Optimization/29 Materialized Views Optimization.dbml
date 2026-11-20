@@ -1,0 +1,33 @@
+// DBML: 29_Optimizing Queries with Materialized Views.dbml
+// Database: instagram
+
+Table posts {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  url        varchar(200) [not null]
+}
+
+Table comments {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  contents   varchar(240) [not null]
+  post_id    integer [not null, ref: > posts.id]
+}
+
+Table likes {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  post_id    integer [ref: > posts.id]
+  comment_id integer [ref: > comments.id]
+}
+
+// Materialized View: weekly_likes (persisted result set, refreshed on demand)
+// CREATE MATERIALIZED VIEW weekly_likes AS (
+//   SELECT date_trunc('week', COALESCE(posts.created_at, comments.created_at)) AS week,
+//          COUNT(posts.id) AS num_likes_for_posts,
+//          COUNT(comments.id) AS num_likes_for_comments
+//   FROM likes
+//   LEFT JOIN posts ON posts.id = likes.post_id
+//   LEFT JOIN comments ON comments.id = likes.comment_id
+//   GROUP BY week ORDER BY week
+// ) WITH DATA

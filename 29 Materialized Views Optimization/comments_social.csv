@@ -1,0 +1,6 @@
+id,created_at,updated_at,contents,user_id,post_id
+1,2026-01-10 10:00:00+00,2026-01-10 10:00:00+00,Breathtaking view!,2,1
+2,2026-01-10 11:00:00+00,2026-01-10 11:00:00+00,Where was this ramen from?,3,2
+3,2026-01-10 12:00:00+00,2026-01-10 12:00:00+00,Love that mechanical keyboard,1,3
+4,2026-01-10 13:00:00+00,2026-01-10 13:00:00+00,Stunning trail photo,1,4
+5,2026-01-10 14:00:00+00,2026-01-10 14:00:00+00,Looks peaceful out there,2,5

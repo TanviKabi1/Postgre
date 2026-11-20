@@ -1,0 +1,6 @@
+id,created_at,updated_at,url,caption,lat,lng,user_id
+1,2026-01-05 14:00:00+00,2026-01-05 14:00:00+00,https://pics.example/p1.jpg,Golden gate sunset,37.8199,-122.4783,1
+2,2026-01-06 15:00:00+00,2026-01-06 15:00:00+00,https://pics.example/p2.jpg,Fresh ramen bowl,40.7128,-74.0060,2
+3,2026-01-07 16:00:00+00,2026-01-07 16:00:00+00,https://pics.example/p3.jpg,Morning coffee coding setup,34.0522,-118.2437,3
+4,2026-01-08 17:00:00+00,2026-01-08 17:00:00+00,https://pics.example/p4.jpg,Mountain lake view,45.3311,-121.7111,200
+5,2026-01-09 18:00:00+00,2026-01-09 18:00:00+00,https://pics.example/p5.jpg,Pine forest trail,45.3500,-121.7200,200
