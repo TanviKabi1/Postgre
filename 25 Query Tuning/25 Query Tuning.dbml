@@ -1,0 +1,23 @@
+// DBML: 25_Advanced Query Tuning.dbml
+// Database: instagram
+
+Table users {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  updated_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  username   varchar(30) [not null]
+  bio        varchar(400)
+  avatar     varchar(200)
+  phone      varchar(25)
+  email      varchar(40)
+  password   varchar(50)
+  status     varchar(15)
+}
+
+Table likes {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  user_id    integer [not null, ref: > users.id]
+  post_id    integer
+  comment_id integer
+}
