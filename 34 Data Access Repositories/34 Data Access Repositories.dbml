@@ -1,0 +1,17 @@
+// DBML: 34_Data Access Pattern Repositories.dbml
+// Database: social_network
+
+Table users {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  updated_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  bio        varchar(400)
+  username   varchar(30) [not null]
+}
+
+// Repository pattern operations demonstrated:
+// find:     SELECT id, created_at, updated_at, bio, username FROM users
+// findById: SELECT ... FROM users WHERE id = $1
+// insert:   INSERT INTO users (username, bio) VALUES ($1, $2) RETURNING *
+// update:   UPDATE users SET bio = $2, updated_at = now() WHERE id = $1 RETURNING *
+// delete:   DELETE FROM users WHERE id = $1 RETURNING *
