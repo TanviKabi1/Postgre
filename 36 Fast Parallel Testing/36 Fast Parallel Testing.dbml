@@ -1,0 +1,14 @@
+// DBML: 36_Fast Parallel Testing.dbml
+// Database: social_network_test
+
+// Schema: test (isolated schema for parallel test runs)
+Table "test.users" [note: 'Lives inside the test schema, isolated from public schema'] {
+  id       serial [pk, increment]
+  username varchar(30) [not null]
+}
+
+// Schema management:
+// CREATE SCHEMA test
+// SET search_path TO test, public  -- directs queries to test schema
+// SET search_path TO "$user", public  -- reset to default
+// DROP SCHEMA test CASCADE          -- cleanup after tests
