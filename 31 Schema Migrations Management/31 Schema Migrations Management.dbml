@@ -1,0 +1,16 @@
+// DBML: 31_Managing Database Design with Schema Migrations.dbml
+// Database: social_network
+
+// Schema after Migration 2 Up (column renamed from contents to body)
+Table comments {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  updated_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  body       varchar(240) [not null, note: 'Renamed from contents in Migration 2']
+}
+
+// Migration history:
+// Migration 1 Up:   CREATE TABLE comments (... contents VARCHAR(240) ...)
+// Migration 2 Up:   ALTER TABLE comments RENAME COLUMN contents TO body
+// Migration 2 Down: ALTER TABLE comments RENAME COLUMN body TO contents
+// Migration 1 Down: DROP TABLE comments
