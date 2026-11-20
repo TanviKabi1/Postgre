@@ -1,0 +1,12 @@
+// DBML: 33_Accessing PostgreSQL from APIs.dbml
+// Database: social_network
+
+// System view used to monitor active API connections
+Table pg_stat_activity [note: 'PostgreSQL system view - not user-defined'] {
+  pid         integer [note: 'Backend process ID']
+  usename     name    [note: 'Username of connected client']
+  client_addr inet    [note: 'IP address of connecting client']
+  state       text    [note: 'State of the backend: active, idle, etc.']
+  query       text    [note: 'Most recent or current SQL query']
+  datname     name    [note: 'Database name being accessed']
+}
