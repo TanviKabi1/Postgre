@@ -1,0 +1,36 @@
+// DBML: 26_Simple Common Table Expressions.dbml
+// Database: instagram
+
+Table users {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  username   varchar(30) [not null]
+}
+
+Table posts {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  url        varchar(200) [not null]
+  user_id    integer [not null, ref: > users.id]
+}
+
+Table photo_tags {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  user_id    integer [not null, ref: > users.id]
+  post_id    integer [not null, ref: > posts.id]
+}
+
+Table caption_tags {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  user_id    integer [not null, ref: > users.id]
+  post_id    integer [not null, ref: > posts.id]
+}
+
+// CTE: tags (virtual - union of photo_tags and caption_tags)
+// WITH tags AS (
+//   SELECT user_id, created_at FROM caption_tags
+//   UNION ALL
+//   SELECT user_id, created_at FROM photo_tags
+// )
