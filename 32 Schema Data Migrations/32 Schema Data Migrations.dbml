@@ -1,0 +1,15 @@
+// DBML: 32_Schema vs Data Migrations.dbml
+// Database: social_network
+
+// Final schema state after all migration steps
+Table posts {
+  id      serial [pk, increment]
+  caption varchar(240)
+  loc     point [note: 'Migrated from separate lat/lng columns using POINT(lng, lat)']
+}
+
+// Migration steps performed:
+// Step 1: CREATE TABLE posts (id, caption, lat REAL, lng REAL)
+// Step 2: ALTER TABLE posts ADD COLUMN loc POINT
+// Step 3: UPDATE posts SET loc = POINT(lng, lat)
+// Step 4: ALTER TABLE posts DROP COLUMN lat, DROP COLUMN lng
