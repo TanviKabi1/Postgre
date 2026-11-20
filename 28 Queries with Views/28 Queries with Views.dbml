@@ -1,0 +1,42 @@
+// DBML: 28_Simplifying Queries with Views.dbml
+// Database: instagram
+
+Table users {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  username   varchar(30) [not null]
+}
+
+Table posts {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  url        varchar(200) [not null]
+  caption    varchar(240)
+  user_id    integer [not null, ref: > users.id]
+}
+
+Table photo_tags {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  user_id    integer [not null, ref: > users.id]
+  post_id    integer [not null, ref: > posts.id]
+}
+
+Table caption_tags {
+  id         serial [pk, increment]
+  created_at "timestamp with time zone" [default: `CURRENT_TIMESTAMP`]
+  user_id    integer [not null, ref: > users.id]
+  post_id    integer [not null, ref: > posts.id]
+}
+
+// View: tags
+// CREATE VIEW tags AS (
+//   SELECT id, created_at, user_id, post_id, 'photo_tag' AS tag_type FROM photo_tags
+//   UNION ALL
+//   SELECT id, created_at, user_id, post_id, 'caption_tag' AS tag_type FROM caption_tags
+// )
+
+// View: recent_posts
+// CREATE VIEW recent_posts AS (
+//   SELECT * FROM posts ORDER BY created_at DESC LIMIT 10
+// )
