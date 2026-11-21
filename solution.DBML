@@ -1,0 +1,101 @@
+// solution.DBML
+// Database schema definition for dbdiagram.io
+
+Table users {
+  id         serial       [pk, increment]
+  created_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  username   varchar(30)  [not null, unique]
+  bio        varchar(400)
+  avatar     varchar(200)
+  phone      varchar(25)
+  email      varchar(40)
+  password   varchar(50)
+  status     varchar(15)
+
+  Note: 'CHECK (COALESCE(phone, email) IS NOT NULL)'
+}
+
+Table posts {
+  id         serial       [pk, increment]
+  created_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  url        varchar(200) [not null]
+  caption    varchar(240)
+  lat        real
+  lng        real
+  user_id    integer      [not null, ref: > users.id]
+}
+
+Table comments {
+  id         serial       [pk, increment]
+  created_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  contents   varchar(240) [not null]
+  user_id    integer      [not null, ref: > users.id]
+  post_id    integer      [not null, ref: > posts.id]
+}
+
+Table likes {
+  id         serial       [pk, increment]
+  created_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  user_id    integer      [not null, ref: > users.id]
+  post_id    integer      [ref: > posts.id]
+  comment_id integer      [ref: > comments.id]
+
+  indexes {
+    (user_id, post_id, comment_id) [unique]
+  }
+}
+
+Table photo_tags {
+  id         serial       [pk, increment]
+  created_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  updated_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  user_id    integer      [not null, ref: > users.id]
+  post_id    integer      [not null, ref: > posts.id]
+  x          integer      [not null]
+  y          integer      [not null]
+
+  indexes {
+    (user_id, post_id) [unique]
+  }
+}
+
+Table caption_tags {
+  id         serial       [pk, increment]
+  created_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  user_id    integer      [not null, ref: > users.id]
+  post_id    integer      [not null, ref: > posts.id]
+
+  indexes {
+    (user_id, post_id) [unique]
+  }
+}
+
+Table hashtags {
+  id         serial       [pk, increment]
+  created_at timestamptz  [default: `CURRENT_TIMESTAMP`]
+  title      varchar(20)  [not null, unique]
+}
+
+Table hashtags_posts {
+  id         serial       [pk, increment]
+  hashtag_id integer      [not null, ref: > hashtags.id]
+  post_id    integer      [not null, ref: > posts.id]
+
+  indexes {
+    (hashtag_id, post_id) [unique]
+  }
+}
+
+Table followers {
+  id          serial       [pk, increment]
+  created_at  timestamptz  [default: `CURRENT_TIMESTAMP`]
+  leader_id   integer      [not null, ref: > users.id]
+  follower_id integer      [not null, ref: > users.id]
+
+  indexes {
+    (leader_id, follower_id) [unique]
+  }
+}
